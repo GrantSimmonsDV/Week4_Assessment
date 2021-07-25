@@ -38,12 +38,13 @@ app.get("/api/fortune", (req, res) => {
 
 
 const feResource = [
+  // "Here are a few helpful sites to intoduce you to what Front-End development is all about:",
   "https://en.wikipedia.org/wiki/Front-end_web_development", 
   "https://blog.devmountain.com/7-reasons-learn-web-development/", 
   "https://developer.mozilla.org/en-US/docs/Learn/Front-end_web_developer"
 ]
 
-app.get("/api/front_end/", (req,res) => {
+app.get("/api/subjects/", (req,res) => {
   res.status(200).send(feResource)
 })
 
