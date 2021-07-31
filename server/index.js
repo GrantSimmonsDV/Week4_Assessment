@@ -21,8 +21,6 @@ app.get("/api/compliment", (req, res) => {
   res.status(200).send(randomCompliment);
 
 })
-
-
 app.get("/api/fortune", (req, res) => {
   const fortunes = ["If you continually give, you will continually have.",
     "Happiness will bring you good luck.",
@@ -36,22 +34,36 @@ app.get("/api/fortune", (req, res) => {
   res.status(200).send(randomFortune);
 })
 
+let fullName = []
 
-const feResource = [
-  // "Here are a few helpful sites to intoduce you to what Front-End development is all about:",
-  "https://en.wikipedia.org/wiki/Front-end_web_development", 
-  "https://blog.devmountain.com/7-reasons-learn-web-development/", 
-  "https://developer.mozilla.org/en-US/docs/Learn/Front-end_web_developer"
-]
-
-app.get("/api/subjects/", (req,res) => {
-  res.status(200).send(feResource)
+app.post("/api/register/", (req,res) => {
+  let {firstName, lastName} = req.params;
+  fullName.push(firstName, lastName)
+  res.status(200).send(fullName)
 })
 
 
+let goalsList = ["Cycle the Hiawatha Trail", "Visit Niagra Falls", "See the temples of Eygpt", "Hike the Appalachian Trail", "Visit the Oregon Coast"]
 
 
+app.get("/api/list/", (req,res) => {
+  res.status(200).send(goalsList)
+})
 
-app.listen(4000, () => {
-  console.log("Server running on 4000")
+
+app.delete('/api/list/:deleteIndex', (req,res) => {
+  const deleteIndex = +req.params.deleteIndex
+  goalsList.splice(deleteIndex, 1)
+  res.status(200).send(goalsList)
+})
+
+//Why do we use params above ^^^, and use body in the one below?
+app.post('/api/list/', (req, res) => {
+  let { addGl } = req.body
+  goalsList.push(addGl)
+  res.status(200).send(goalsList)
+})
+
+app.listen(4005, () => {
+  console.log("Server running on 4005")
 })
